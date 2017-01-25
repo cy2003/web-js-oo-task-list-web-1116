@@ -2,9 +2,9 @@
 // List Model
 List.all = []
 
-function List (title, tasks = []){
+function List (title){
   this.title = title
-  this.tasks = tasks
+  this.tasks = []
   this.id = List.all.length
   List.all.push(this)
 }
