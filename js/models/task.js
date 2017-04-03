@@ -4,9 +4,8 @@ function Task(description, priority, list){
   this.description = description
   this.priority = priority
   this.list = list
+  this.id = this.list.tasks.length
   this.list.tasks.push(this)
-  this.id = this.list.tasks.length - 1
-
 }
 
 Task.prototype.liEl = function(){
@@ -14,5 +13,5 @@ Task.prototype.liEl = function(){
 }
 
 Task.prototype.build = function(){
-  $("ul").append(this.liEl())
+  $(`#list-${this.list.id}`).append(this.liEl())
 }

@@ -10,10 +10,19 @@ function TasksController(){
 }
 
 TasksController.prototype.init = function(){
-  this.$addTaskForm.submit((event) => {
+  this.$addTaskForm.submit((event)=> {
     event.preventDefault()
-    var id = this.$selectListMenu.val()
-    var tk = new Task(this.$taskDescriptionInput.val(),this.$taskPriorityInput.val(), List.all[id] )
-    tk.build()
-})
+    var description = this.$taskDescriptionInput.val()
+    var priority = this.$taskPriorityInput.val()
+    var listId = parseInt(this.$selectListMenu.val())
+    var list = List.all[listId]
+    var task = new Task(description, priority, list)
+    var taskId = task.id
+    task.build()
+    debugger
+    $(`ul[data-id=${listId}]`).children(`li[data-id=${taskId}]`).children('button').click(() => {
+      $(`ul[data-id=${listId}]`).children(`li[data-id=${taskId}]`).remove()
+    list.tasks[taskId] = null
+    })
+  })
 }

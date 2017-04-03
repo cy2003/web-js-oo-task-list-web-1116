@@ -10,12 +10,13 @@ function ListsController() {
 
 ListsController.prototype.init = function(){
   this.$addTaskForm.hide()
-  this.$addListForm.submit((event) => {
+  this.$addListForm.submit((event)=> {
     event.preventDefault()
-    this.$addTaskForm.show()
-    // this.addEventListener("click", this.build)
-    // this.build()
     var list = new List(this.$listTitleInput.val())
     list.build()
+    $(`ul#list-${list.id}`).parent().children('h2').children('button').click(() => {
+      $(`ul#list-${list.id}`).closest('div').remove()
+    })
+    this.$addTaskForm.show()
   })
 }
